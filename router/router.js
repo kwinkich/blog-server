@@ -11,4 +11,7 @@ router.put('/posts/update/:id', PostController.editPost);
 router.delete('/posts/delete/:id', PostController.deletePost);
 
 router.get('/news', NewsController.getNews);
+router.get('/news/:id', NewsController.getNewsById);
 router.post('/news/create', NewsController.createNews);
+router.put('/news/update/:id', NewsController.editNews);
+router.delete('/news/delete/:id', NewsController.deleteNews);
