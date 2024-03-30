@@ -31,7 +31,8 @@ class PostService {
 
 	async editPost(postId, postData) {
 		try {
-			const editPost = await Post.findByIdAndUpdate(postId, postData, {
+			const tags = postData.tags.split(',').map((tag) => tag.trim());
+			const editPost = await Post.findByIdAndUpdate(postId, {...postData, tags}, {
 				new: true,
 			});
 			await editPost.save();
