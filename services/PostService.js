@@ -31,16 +31,24 @@ class PostService {
 
 	async editPost(postId, postData) {
 		try {
-			const tags = postData.tags.split(',').map((tag) => tag.trim());
-			const editPost = await Post.findByIdAndUpdate(postId, {...postData, tags}, {
-				new: true,
-			});
-			await editPost.save();
-			return editPost;
-		} catch (err) {
-			throw new Error(err);
-		}
-	}
+        let tags;
+        if (postData.tags) {
+           tags = postData.tags.split(',').map((tag) => tag.trim());
+        } else {
+            const existingPost = await Post.findById(postId);
+            tags = existingPost.tags;
+        }
+        
+        const editPost = await Post.findByIdAndUpdate(postId, {...postData, tags}, {
+            new: true,
+        });
+
+        await editPost.save();
+        
+        return editPost;
+    } catch (err) {
+        throw new Error(err);
+    }	}
 
 	async deletePost(postId) {
 		try {
