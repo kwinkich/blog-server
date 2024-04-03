@@ -68,3 +68,5 @@ class BotController {
 		}
 	}
 }
+
+export default new BotController();
