@@ -1,6 +1,7 @@
 import Router from 'express';
 import NewsController from '../controllers/NewsController.js';
 import PostController from '../controllers/PostController.js';
+import AuthController from '../controllers/AuthController.js';
 
 export const router = new Router();
 
@@ -15,3 +16,6 @@ router.get('/news/:id', NewsController.getNewsById);
 router.post('/news/create', NewsController.createNews);
 router.put('/news/update/:id', NewsController.editNews);
 router.delete('/news/delete/:id', NewsController.deleteNews);
+
+
+router.post('/verify', AuthController.verifyTelegramWebApp);
