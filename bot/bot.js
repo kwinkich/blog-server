@@ -15,7 +15,7 @@ export default function launchBot () {
       await bot.sendMessage(chatId, 'Управляй блогом легко и просто', {
         reply_markup: {
           inline_keyboard: [
-            [{text: `Управлять блогом ${chatId}`, web_app: {url: webAppUrl}}]
+            [{text: `Лол иди нах блогом ${chatId}`, web_app: {url: webAppUrl}}]
           ]
         }
       })
