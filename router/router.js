@@ -5,7 +5,7 @@ import PostController from '../controllers/PostController.js';
 
 export const router = new Router();
 
-router.get('/bot', BotController.getBotInfo);
+router.post('/bot', BotController.getBotInfo);
 
 router.get('/posts', PostController.getPosts);
 router.get('/posts/:id', PostController.getPostById);
