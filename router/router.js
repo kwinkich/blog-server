@@ -5,6 +5,8 @@ import AuthController from '../controllers/AuthController.js';
 
 export const router = new Router();
 
+router.post('/user/verify', AuthController.verifyTelegramWebApp);
+
 router.get('/posts', PostController.getPosts);
 router.get('/posts/:id', PostController.getPostById);
 router.post('/posts/create', PostController.createPost);
@@ -16,6 +18,3 @@ router.get('/news/:id', NewsController.getNewsById);
 router.post('/news/create', NewsController.createNews);
 router.put('/news/update/:id', NewsController.editNews);
 router.delete('/news/delete/:id', NewsController.deleteNews);
-
-
-router.post('/verify', AuthController.verifyTelegramWebApp);
