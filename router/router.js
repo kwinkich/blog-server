@@ -1,11 +1,8 @@
 import Router from 'express';
-import BotController from '../controllers/AuthController.js';
 import NewsController from '../controllers/NewsController.js';
 import PostController from '../controllers/PostController.js';
 
 export const router = new Router();
-
-router.post('/bot', BotController.getBotInfo);
 
 router.get('/posts', PostController.getPosts);
 router.get('/posts/:id', PostController.getPostById);
