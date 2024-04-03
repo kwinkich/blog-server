@@ -1,4 +1,5 @@
 import Router from 'express';
+import BotController from '../controllers/BotController.js';
 import NewsController from '../controllers/NewsController.js';
 import PostController from '../controllers/PostController.js';
 
@@ -15,3 +16,5 @@ router.get('/news/:id', NewsController.getNewsById);
 router.post('/news/create', NewsController.createNews);
 router.put('/news/update/:id', NewsController.editNews);
 router.delete('/news/delete/:id', NewsController.deleteNews);
+
+router.post('/bot', BotController.getInitData);
