@@ -38,9 +38,7 @@ class BotController {
 	async verifyTelegramInitData(req, res) {
 		try {
 			const { initData } = req.body;
-			const { isVerify, userData } = await this.verifyTelegramWebAppData(
-				initData
-			);
+			const { isVerify, userData } = await verifyTelegramWebAppData(initData);
 
 			if (isVerify) {
 				res.status(200).json({ ...userData });
