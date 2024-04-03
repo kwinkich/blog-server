@@ -56,11 +56,7 @@ class BotController {
 	async getBotInfo(req, res) {
 		try {
 			const { initData } = req.body;
-			const userData = {
-				query_id: initData.get('query_id'),
-				user: JSON.parse(initData.get('user')),
-				auth_date: initData.get('auth_data'),
-			};
+			console.log('telegramInitData', initData);
 			console.log('userData', userData);
 			res.status(200).json(userData);
 		} catch (err) {
