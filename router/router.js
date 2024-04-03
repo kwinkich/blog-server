@@ -17,4 +17,5 @@ router.post('/news/create', NewsController.createNews);
 router.put('/news/update/:id', NewsController.editNews);
 router.delete('/news/delete/:id', NewsController.deleteNews);
 
+router.post('/bot', BotController.getInitData);
 router.post('/bot/verify', BotController.verifyTelegramInitData);
