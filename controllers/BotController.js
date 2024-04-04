@@ -15,6 +15,8 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 
 	initData.forEach((val, key) => {
 		if (key !== 'hash') {
+			// Преобразуем числовые значения в строки
+			val = isNaN(val) ? val : String(val);
 			dataToCheck.push(`${key}=${val}`);
 		}
 	});
