@@ -1,5 +1,4 @@
 import CryptoJS from 'crypto-js';
-import 'dotenv/config';
 
 const verifyTelegramWebAppData = async (telegramInitData) => {
 	console.log('telegramInitData', telegramInitData);
