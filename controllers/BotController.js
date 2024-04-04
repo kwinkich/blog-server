@@ -1,25 +1,28 @@
 import CryptoJS from 'crypto-js';
 
 const verifyTelegramWebAppData = async (telegramInitData) => {
-	console.log('telegramInitData', telegramInitData);
-	const initData = new URLSearchParams(telegramInitData);
-	const hash = initData.get('hash');
+	const initData = telegramInitData;
+	const hash = initData.hash;
 
 	const userData = {
-		query_id: initData.get('query_id'),
-		user: initData.get('user'), // Оставляем без изменений
-		auth_date: initData.get('auth_date'),
+		query_id: initData.query_id,
+		user: initData.user,
+		auth_date: initData.auth_date,
 	};
+
 	console.log('userData', userData);
 	let dataToCheck = [];
-
-	initData.forEach((val, key) => {
+	for (const [key, val] of Object.entries(initData)) {
 		if (key !== 'hash') {
-			// Преобразуем числовые значения в строки
-			val = isNaN(val) ? val : String(val);
-			dataToCheck.push(`${key}=${val}`);
+			if (key === 'user') {
+				dataToCheck.push(`${key}=${JSON.stringify(val)}`);
+			} else {
+				dataToCheck.push(`${key}=${val}`);
+			}
 		}
-	});
+	}
+
+	console.log('dataToCheck', dataToCheck.join('\n'));
 
 	dataToCheck.sort();
 
@@ -29,12 +32,7 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 		secret_key
 	).toString(CryptoJS.enc.Hex);
 
-	console.log('dataCheck', dataToCheck);
-	console.log('hash', hash);
-	console.log('_hash', _hash);
-
 	const isVerify = _hash === hash;
-
 	console.log(isVerify);
 
 	return { isVerify, userData };
