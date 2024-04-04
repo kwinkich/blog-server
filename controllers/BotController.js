@@ -8,7 +8,7 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 
 	const userData = {
 		query_id: initData.get('query_id'),
-		user: initData.get('user'),
+		user: JSON.parse(initData.get('user')),
 		auth_date: initData.get('auth_date'),
 	};
 	console.log('userData', userData);
@@ -23,6 +23,9 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 	const _hash = CryptoJS.HmacSHA256(dataToCheck.join('\n'), secret).toString(
 		CryptoJS.enc.Hex
 	);
+
+	console.log('secret', secret);
+	console.log('_hash', _hash);
 
 	const isVerify = _hash === hash;
 
