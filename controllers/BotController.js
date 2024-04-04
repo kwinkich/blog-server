@@ -8,7 +8,7 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 
 	const userData = {
 		query_id: initData.get('query_id'),
-		user: JSON.parse(initData.get('user')),
+		user: initData.get('user'),
 		auth_date: initData.get('auth_date'),
 	};
 	console.log('userData', userData);
