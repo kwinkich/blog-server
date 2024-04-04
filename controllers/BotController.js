@@ -18,10 +18,13 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 		(val, key) => key !== 'hash' && dataToCheck.push(`${key}=${val}`)
 	);
 
-	const secret = CryptoJS.HmacSHA256(process.env.TOKEN, 'WebAppData');
-	const _hash = CryptoJS.HmacSHA256(dataToCheck.join('\n'), secret).toString(
-		CryptoJS.enc.Hex
-	);
+	const secret_key = CryptoJS.HmacSHA256(process.env.TOKEN, 'WebAppData');
+	const _hash = CryptoJS.HmacSHA256(
+		dataToCheck.join('\n'),
+		secret_key
+	).toString(CryptoJS.enc.Hex);
+
+	console.log('dataCheck', dataToCheck);
 	console.log('hash', hash);
 	console.log('_hash', _hash);
 
