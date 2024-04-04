@@ -8,7 +8,7 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 
 	const userData = {
 		query_id: initData.get('query_id'),
-		user: initData.get('user'),
+		user: JSON.stringify(initData.get('user')),
 		auth_date: initData.get('auth_date'),
 	};
 	console.log('userData', userData);
@@ -19,7 +19,10 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 		(val, key) => key !== 'hash' && dataToCheck.push(`${key}=${val}`)
 	);
 
-	const secret = CryptoJS.HmacSHA256(process.env.TELEGRAM_API, 'WebAppData');
+	const secret = CryptoJS.HmacSHA256(
+		'6306801573:AAE2cEGd27BETqy9cIkiwTZWT5uuAoO6FqA',
+		'WebAppData'
+	);
 	const _hash = CryptoJS.HmacSHA256(dataToCheck.join('\n'), secret).toString(
 		CryptoJS.enc.Hex
 	);
