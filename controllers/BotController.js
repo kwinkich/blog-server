@@ -7,16 +7,19 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 
 	const userData = {
 		query_id: initData.get('query_id'),
-		user: JSON.stringify(initData.get('user')),
+		user: initData.get('user'), // Оставляем без изменений
 		auth_date: initData.get('auth_date'),
 	};
 	console.log('userData', userData);
 	let dataToCheck = [];
 
-	initData.sort();
-	initData.forEach(
-		(val, key) => key !== 'hash' && dataToCheck.push(`${key}=${val}`)
-	);
+	initData.forEach((val, key) => {
+		if (key !== 'hash') {
+			dataToCheck.push(`${key}=${val}`);
+		}
+	});
+
+	dataToCheck.sort();
 
 	const secret_key = CryptoJS.HmacSHA256(process.env.TOKEN, 'WebAppData');
 	const _hash = CryptoJS.HmacSHA256(
