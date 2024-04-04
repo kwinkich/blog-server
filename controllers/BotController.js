@@ -45,8 +45,8 @@ class BotController {
 			} else {
 				res.status(403).json({ message: 'Стой!' });
 			}
-		} catch (e) {
-			res.status(500).json({ message: 'Oops...', error: e });
+		} catch (err) {
+			res.status(500).json(err);
 		}
 	}
 }
