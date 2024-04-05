@@ -72,6 +72,7 @@ class NewsService {
 			const token = await TokenService.getToken();
 			if (secret_token === token.token) {
 				const deletedNews = await News.findByIdAndDelete(newsId);
+				await deletedNews.save();
 				return deletedNews;
 			} else {
 				throw new Error('Invalid token');

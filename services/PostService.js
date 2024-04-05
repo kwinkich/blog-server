@@ -1,5 +1,5 @@
 import Post from '../schemes/Post.js';
-
+import TokenService from './TokenService.js';
 class PostService {
 	async getPosts() {
 		try {
@@ -86,6 +86,7 @@ class PostService {
 			const token = await TokenService.getToken();
 			if (secret_token === token.token) {
 				const deletedPost = await Post.findByIdAndDelete(postId);
+				await deletedPost.save();
 				return deletedPost;
 			} else {
 				throw new Error('Invalid token');
