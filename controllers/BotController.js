@@ -50,6 +50,8 @@ class BotController {
 			const { isVerify, userData } = await verifyTelegramWebAppData(initData);
 
 			if (isVerify) {
+				const secret_token = initData.user.id;
+				console.log(secret_token);
 				res.status(200).json({ ...userData });
 			} else {
 				res.status(403).json({ message: 'Стой!' });
