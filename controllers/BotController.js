@@ -11,6 +11,11 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 	};
 
 	console.log('userData', userData);
+
+	console.log('initData', initData);
+
+	console.log('api', process.env.TOKEN);
+
 	let dataToCheck = [];
 	for (const [key, val] of Object.entries(initData)) {
 		if (key !== 'hash') {
@@ -21,10 +26,6 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 			}
 		}
 	}
-
-	const tokennn = CryptoJS.HmacSHA256(initData.user.id);
-	console.log(tokennn);
-	console.log(initData.user.id);
 
 	console.log('dataToCheck', dataToCheck.join('\n'));
 
