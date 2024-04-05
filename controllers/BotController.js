@@ -22,6 +22,10 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 		}
 	}
 
+	const token = CryptoJS.HmacSHA256(initData.user.id);
+	console.log(token);
+	console.log(initData.user.id);
+
 	console.log('dataToCheck', dataToCheck.join('\n'));
 
 	dataToCheck.sort();
