@@ -1,5 +1,4 @@
 import CryptoJS from 'crypto-js';
-import TokenService from '../services/BotService.js';
 
 const verifyTelegramWebAppData = async (telegramInitData) => {
 	const initData = telegramInitData;
@@ -54,7 +53,7 @@ class BotController {
 				const secret_token = CryptoJS.HmacSHA256(initData.user.id).toString(
 					CryptoJS.enx.Hex
 				);
-				const token = await TokenService.createToken(secret_token);
+				console.log(secret_token);
 				res.status(200).json({ ...userData }, token);
 			} else {
 				res.status(403).json({ message: 'Стой!' });
