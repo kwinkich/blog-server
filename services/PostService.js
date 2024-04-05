@@ -87,7 +87,6 @@ class PostService {
 			if (secret_token === token.token) {
 				const deletedPost = await Post.findByIdAndDelete(postId);
 				await deletedPost.save();
-				return deletedPost;
 			} else {
 				throw new Error('Invalid token');
 			}
