@@ -22,6 +22,7 @@ class NewsController {
 	async createNews(req, res) {
 		try {
 			const { initData, newsData } = req.body;
+			console.log(initData);
 			const news = await NewsService.createNews(newsData, initData);
 			return res.status(200).json(news);
 		} catch (e) {
