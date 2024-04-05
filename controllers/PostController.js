@@ -21,8 +21,8 @@ class PostController {
 
 	async createPost(req, res) {
 		try {
-			const { initData, newsData } = req.body;
-			const post = await PostService.createPost(newsData, initData);
+			const { initData, postData } = req.body;
+			const post = await PostService.createPost(postData, initData);
 			return res.status(200).json(post);
 		} catch (e) {
 			return res.status(500).json(e.message);
@@ -31,10 +31,10 @@ class PostController {
 
 	async editPost(req, res) {
 		try {
-			const { initData, newsData } = req.body;
+			const { initData, postData } = req.body;
 			const editPost = await PostService.editPost(
 				req.params.id,
-				newsData,
+				postData,
 				initData
 			);
 			return res.status(200).json(editPost);
