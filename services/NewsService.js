@@ -1,5 +1,6 @@
+import CryptoJS from 'crypto-js';
 import News from '../schemes/News.js';
-
+import TokenService from './TokenService.js';
 class NewsService {
 	async getNews() {
 		try {
@@ -19,31 +20,62 @@ class NewsService {
 		}
 	}
 
-	async createNews(newsData) {
+	async createNews(newsData, initData) {
 		try {
-			const news = await News.create(newsData);
-			return news;
+			const secret_token = CryptoJS.HmacSHA256(
+				initData.user.id,
+				process.env.TOKEN
+			).toString();
+
+			const token = await TokenService.getToken();
+
+			if (secret_token === token.token) {
+				const news = await News.create(newsData);
+				return news;
+			} else {
+				throw new Error('Invalid token');
+			}
 		} catch (err) {
 			throw new Error(err);
 		}
 	}
 
-	async editNews(newsId, newsData) {
+	async editNews(newsId, newsData, initData) {
 		try {
-			const editedNews = await News.findByIdAndUpdate(newsId, newsData, {
-				new: true,
-			});
-			await editedNews.save();
-			return editedNews;
+			const secret_token = CryptoJS.HmacSHA256(
+				initData.user.id,
+				process.env.TOKEN
+			).toString();
+
+			const token = await TokenService.getToken();
+			if (secret_token === token.token) {
+				const editedNews = await News.findByIdAndUpdate(newsId, newsData, {
+					new: true,
+				});
+				await editedNews.save();
+				return editedNews;
+			} else {
+				throw new Error('Invalid token');
+			}
 		} catch (err) {
 			throw new Error(err);
 		}
 	}
 
-	async deleteNews(newsId) {
+	async deleteNews(newsId, initData) {
 		try {
-			const deletedNews = await News.findByIdAndDelete(newsId);
-			return deletedNews;
+			const secret_token = CryptoJS.HmacSHA256(
+				initData.user.id,
+				process.env.TOKEN
+			).toString();
+
+			const token = await TokenService.getToken();
+			if (secret_token === token.token) {
+				const deletedNews = await News.findByIdAndDelete(newsId);
+				return deletedNews;
+			} else {
+				throw new Error('Invalid token');
+			}
 		} catch (err) {
 			throw new Error(err);
 		}

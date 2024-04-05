@@ -21,7 +21,8 @@ class PostController {
 
 	async createPost(req, res) {
 		try {
-			const post = await PostService.createPost(req.body);
+			const { initData, newsData } = req.body;
+			const post = await PostService.createPost(newsData, initData);
 			return res.status(200).json(post);
 		} catch (e) {
 			return res.status(500).json(e.message);
@@ -30,7 +31,12 @@ class PostController {
 
 	async editPost(req, res) {
 		try {
-			const editPost = await PostService.editPost(req.params.id, req.body);
+			const { initData, newsData } = req.body;
+			const editPost = await PostService.editPost(
+				req.params.id,
+				newsData,
+				initData
+			);
 			return res.status(200).json(editPost);
 		} catch (e) {
 			return res.status(500).json(e.message);
@@ -39,7 +45,8 @@ class PostController {
 
 	async deletePost(req, res) {
 		try {
-			const deletedPost = await PostService.deletePost(req.params.id);
+			const { initData } = req.body;
+			const deletedPost = await PostService.deletePost(req.params.id, initData);
 			return res.status(200).json(deletedPost);
 		} catch (e) {
 			return res.status(500).json(e.message);
