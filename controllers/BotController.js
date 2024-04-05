@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-import Token from '../schemes/Token';
+import Token from '../schemes/Token.js';
 
 const verifyTelegramWebAppData = async (telegramInitData) => {
 	const initData = telegramInitData;
