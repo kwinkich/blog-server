@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js';
+import Token from '../schemes/Token';
 
 const verifyTelegramWebAppData = async (telegramInitData) => {
 	const initData = telegramInitData;
@@ -10,11 +11,11 @@ const verifyTelegramWebAppData = async (telegramInitData) => {
 		auth_date: initData.auth_date,
 	};
 
-	console.log('userData', userData);
+	const secret_token = CryptoJS.HmacSHA256(initData.user.id).toString(
+		CryptoJS.enc.Hex
+	);
 
-	console.log('initData', initData);
-
-	console.log('api', process.env.TOKEN);
+	await Token.create({ token: secret_token });
 
 	let dataToCheck = [];
 	for (const [key, val] of Object.entries(initData)) {
